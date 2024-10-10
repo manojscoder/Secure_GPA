@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      width: 400px; /* Increased width */
+    }
+    .login-container h2 {
+      text-align: center;
+      margin-bottom: 30px; /* Increased margin */
+    }
+    .login-container input[type="text"] {
+      width: 100%;
+      padding: 15px; /* Increased padding */
+      margin: 15px 0; /* Increased margin */
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .login-container button {
+      width: 100%;
+      padding: 15px; /* Increased padding */
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 15px; /* Increased margin */
+    }
+    .login-container button:hover {
+      background-color: #45a049;
+    }
+    .login-container .signup-btn {
+      background-color: #007BFF;
+    }
+    .login-container .signup-btn:hover {
+      background-color: #0056b3;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h2>Login</h2>
+    <form action="/set_username2" method="POST">
+      <input type="text" placeholder="Enter username" name="username" required>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <script>
+    function showAlert(message) {
+            if (message) {
+                alert(message);
+                window.location.href = '/login_page';  
+            }
+        }
+  </script>
+</body>
+</html>
