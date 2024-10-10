@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login and Sign Up</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    .container button {
+      width: 200px;
+      padding: 15px;
+      margin: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+    }
+    .login-btn {
+      background-color: #4CAF50;
+    }
+    .login-btn:hover {
+      background-color: #45a049;
+    }
+    .signup-btn {
+      background-color: #007BFF;
+    }
+    .signup-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body onload="showAlert('{{ message }}')">
+
+  <div class="container">
+    <h2>Welcome</h2>
+    <form action="/login_page">
+        <button class="login-btn">Login</button>
+    </form>
+
+<form action="/sign_up_page">
+    <button class="signup-btn">Sign Up</button>
+</form>
+  </div>
+  <script>
+    function showAlert(message) {
+            if (message) {
+                alert(message);
+                window.location.href = '/';  
+            }
+        }
+  </script>
+</body>
+</html>
