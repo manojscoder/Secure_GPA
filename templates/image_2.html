@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Grid</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* 5 columns */
+            grid-gap: 10px;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        .image-grid .image-container {
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            height: 150px; /* Container height */
+        }
+
+        .image-grid img {
+            width: 70%;   /* Image width: 70% */
+            height: 90%;  /* Image height: 90% */
+            object-fit: cover;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Select a Image</h2>
+    <div class="image-grid" id="image-grid">
+        {% for image in images %}
+            <div class="image-container" onclick="selectImage('{{ image }}')">
+                <img src="{{ url_for('static', filename='images/' + image) }}" alt="Image">
+            </div>
+        {% endfor %}
+    </div>
+
+    <script>
+       
+        function selectImage(image) {
+            console.log("Image selected:", image); 
+
+           
+            fetch('/select_image1', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ image: image })
+            })
+            .then(response => {
+                
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+        
+                if (data.status === 'success') {
+                    updateImageGrid(data.images);
+                } else if (data.status === 'completed') {
+                    window.location.href = '/success';
+                }
+                else{
+                    window.location.href = '/unsuccessful';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        
+        function updateImageGrid(images) {
+            const grid = document.getElementById('image-grid');
+            grid.innerHTML = '';
+
+            images.forEach(image => {
+                const container = document.createElement('div');
+                container.className = 'image-container';
+                container.onclick = () => selectImage(image);
+
+                const img = document.createElement('img');
+                img.src = `{{ url_for('static', filename='images/') }}${image}`; 
+                img.alt = "Image";
+
+                container.appendChild(img);
+                grid.appendChild(container);
+            });
+        }
+    </script>
+
+</body>
+</html>
